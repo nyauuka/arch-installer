@@ -122,16 +122,18 @@ echo "127.0.0.1        localhost
 ::1              localhost
 127.0.1.1        archlinux" > /etc/hosts
 
+systemctl enable systemd-resolved
 cat > /etc/resolved.conf << doned
 [Resolve]
 DNS=1.1.1.1 1.0.0.1
 FallbackDNS=8.8.8.8 8.8.4.4
 doned
+rm -f /etc/resolv.conf
+ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 #turning on servises
 systemctl enable iwd
 systemctl enable dhcpcd
-systemctl enable systemd-resolved
 
 #bootloader install
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
