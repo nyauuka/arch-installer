@@ -128,8 +128,6 @@ cat > /etc/resolved.conf << doned
 DNS=1.1.1.1 1.0.0.1
 FallbackDNS=8.8.8.8 8.8.4.4
 doned
-rm -f /etc/resolv.conf
-ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 #turning on servises
 systemctl enable iwd
